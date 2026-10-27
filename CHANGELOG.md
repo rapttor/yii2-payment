@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 - 2026-10-27
 - Provider interface, `Payments` component, local catalog (products, prices, discounts), orders, subscriptions, wallet ledger, idempotent webhook processing.
 - Providers: Stripe, Paddle Billing, Lemon Squeezy, PayPal (one-time), Sandbox (fake).
 - Catalog sync to Stripe and Paddle (`payments/sync`), API/doc links per provider, `publicUrl` option.
