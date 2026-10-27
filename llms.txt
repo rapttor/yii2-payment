@@ -1,0 +1,27 @@
+# rapttor/yii2-payment
+
+> Yii2 extension: many payment providers (Stripe, Paddle, Lemon Squeezy, PayPal; Monri, Payten, Klarna, Swish, Payoneer planned) behind one API, with a local catalog (products, prices, discounts), orders, subscriptions, wallet ledger (coins, credits), idempotent webhooks, and a backoffice module to enable or disable each provider. PHP >= 8.2, Yii2 ~2.0.54, MIT.
+
+Key facts for agents: component `Yii::$app->payments` (class `rapttor\payment\Payments`); credentials only from env/config, never the database; money is integer minor units taken from our database; webhooks are signature-verified, normalised to `WebhookEvent`, deduplicated by (provider, event_id).
+
+## Docs
+- [README](README.md): overview, install, usage, API of the component
+- [AGENTS.md](AGENTS.md): rules and step-by-step instructions for coding agents (integrate, add a provider, test)
+- [docs/setup/README.md](docs/setup/README.md): install in an app, tunnels for webhooks, go-live checklist
+- [docs/setup/stripe.md](docs/setup/stripe.md), [paddle.md](docs/setup/paddle.md), [lemonsqueezy.md](docs/setup/lemonsqueezy.md), [paypal.md](docs/setup/paypal.md): per-provider setup
+- [docs/PROVIDERS.md](docs/PROVIDERS.md): capability matrix, what can be controlled by API, official API links
+- [docs/ANALYSIS.md](docs/ANALYSIS.md): design decisions, possibilities, risks, order of work
+- [docs/TASKS.md](docs/TASKS.md): task list with model tags
+
+## Code map
+- [src/Payments.php](src/Payments.php): checkout(), available(), quote(), webhookUrl(), wallet(), processor()
+- [src/providers/ProviderInterface.php](src/providers/ProviderInterface.php): the contract; BaseProvider has curl helper; CatalogSyncInterface, ReturnHandlerInterface are optional
+- [src/services/Processor.php](src/services/Processor.php): applies WebhookEvent to orders/subscriptions/wallet
+- [src/services/WalletService.php](src/services/WalletService.php): credit/debit/balance/history with idempotency keys
+- [src/services/CatalogSync.php](src/services/CatalogSync.php): push local prices to Stripe/Paddle
+- [src/Pricing.php](src/Pricing.php): discount and yearly-price math (pure, tested)
+- [src/backoffice/Module.php](src/backoffice/Module.php): admin UI
+- [src/migrations](src/migrations): tables payment_*
+
+## Optional
+- [tests](tests): PHPUnit, no database needed for signature/mapping tests

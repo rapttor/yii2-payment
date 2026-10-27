@@ -1,0 +1,28 @@
+{
+    "name": "rapttor/yii2-payment",
+    "description": "Yii2 extension that puts many payment providers (Stripe, Paddle, PayPal, Lemon Squeezy, Monri, Payten, Klarna, Swish, Payoneer...) behind one API, with a local catalog (products, prices, discounts), wallets/coins, subscriptions, webhooks and a backoffice module to enable or disable each provider.",
+    "type": "yii2-extension",
+    "keywords": ["yii2", "yii2-extension", "payments", "stripe", "paddle", "paypal", "lemonsqueezy", "monri", "payten", "klarna", "swish", "payoneer", "wallet", "subscriptions"],
+    "homepage": "https://github.com/rapttor/yii2-payment",
+    "license": "MIT",
+    "authors": [{"name": "Rapttor", "homepage": "https://rapttor.com"}],
+    "support": {
+        "issues": "https://github.com/rapttor/yii2-payment/issues",
+        "source": "https://github.com/rapttor/yii2-payment"
+    },
+    "require": {
+        "php": ">=8.2",
+        "yiisoft/yii2": "~2.0.54",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {"psr-4": {"rapttor\\payment\\": "src/"}},
+    "autoload-dev": {"psr-4": {"rapttor\\payment\\tests\\": "tests/"}},
+    "repositories": [{"type": "composer", "url": "https://asset-packagist.org"}],
+    "scripts": {"test": "phpunit -c phpunit.xml"},
+    "config": {"allow-plugins": {"yiisoft/yii2-composer": true}},
+    "extra": {"bootstrap": "rapttor\\payment\\Bootstrap"}
+}
